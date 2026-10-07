@@ -1,0 +1,8 @@
+name: learning-progress-api
+
+services:
+  dynamodb-local:
+    image: amazon/dynamodb-local:3.3.1
+    command: ["-jar", "DynamoDBLocal.jar", "-sharedDb", "-inMemory"]
+    ports:
+      - "8000:8000"

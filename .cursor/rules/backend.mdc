@@ -1,0 +1,23 @@
+---
+description: Backend demo constraints for learning-progress-api
+alwaysApply: true
+---
+
+# Backend demo
+
+Inspect the existing modules, tests, and README before editing. Ask about a material ambiguity. Keep the change inside the requested scope and small enough to review.
+
+- Validate body, path, and pagination input at runtime.
+- Take the learner id from the verified authorizer context. Do not accept it from the request body.
+- A retry of the same completion must not award points twice. Do not treat every transaction failure as a duplicate.
+- Do not weaken or delete a test to make it pass.
+- Report the checks that actually ran and the checks still pending.
+- Never read or expose secrets, credentials, production data, or sensitive files.
+- Deployment, production access, destructive operations, commits, and pushes need explicit human approval.
+
+`.cursor/rules` are instructions. `.cursorignore` only limits file search. It does not configure command approval and does not guarantee a secret is unreachable through the terminal or another tool.
+
+```typescript
+// Use the verified identity instead of trusting the request body.
+const learnerId = event.requestContext.authorizer?.jwt?.claims?.sub;
+```

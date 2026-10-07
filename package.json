@@ -1,0 +1,33 @@
+{
+  "name": "learning-progress-api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Interview demo: lesson progress API on Lambda, API Gateway, and DynamoDB.",
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "build": "npm run typecheck && tsc -p tsconfig.build.json",
+    "test:unit": "vitest run --config vitest.unit.config.ts",
+    "dynamodb:up": "docker compose up -d",
+    "dynamodb:down": "docker compose down",
+    "test:integration": "node scripts/ensure-dynamodb.mjs && vitest run --config vitest.integration.config.ts",
+    "test": "npm run test:unit && npm run test:integration",
+    "package": "npm run build && node scripts/package-lambda.mjs"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "3.1147.0",
+    "@aws-sdk/lib-dynamodb": "3.1147.0",
+    "@aws-sdk/util-dynamodb": "3.996.9",
+    "@smithy/node-http-handler": "4.12.1",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "8.10.164",
+    "@types/node": "24.19.1",
+    "typescript": "7.0.2",
+    "vitest": "5.0.3"
+  }
+}
